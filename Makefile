@@ -1,7 +1,7 @@
 
 NAME		= fractol
-SRC		= src/app.c
-OBJECT_O	= app.o
+SRC		= src/app.c src/tools.c src/fractol.c
+OBJECT_O	= app.o fractol.o tools.o
 WARNING 	= -Wall -Wextra -Werror
 
 all: $(NAME)
