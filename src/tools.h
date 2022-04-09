@@ -17,6 +17,15 @@ typedef struct s_pos {
 typedef struct s_vars {
 	void *mlx;
 	void *win;	
+	
+	double moveX;
+	double moveY;
+	double scale;
+	
+	unsigned int iteration;
+
+	t_data *img;
+	
 }	t_vars;
 
 

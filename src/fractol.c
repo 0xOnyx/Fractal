@@ -3,15 +3,7 @@
 
 #include "tools.h"
 
-#define moveX -0.5
-#define moveY 0
-
-#define scale 1
-
-#define iteration 100
-
-#include <stdio.h>
-void	fractal_calc(t_data *img, int width, int height)
+void	fractal_calc(t_vars *vars, int width, int height)
 {
 	int color;
 
@@ -32,20 +24,21 @@ void	fractal_calc(t_data *img, int width, int height)
 	x = 0;
 	y = 0;
 
+	
+
 	while(x < height)
 	{
-		printf("x => %d, y => %d\n", x, y );
 		while(y < width)
 		{
-			pr = 1.5 * (x - width / 2) / (0.5 * scale * width) + moveX;
-			pi = (y - height / 2) / (0.5 * scale * height) + moveY;
+			pr = 1.5 * (x - width / 2) / (0.5 * vars->scale * width) + vars->moveX;
+			pi = (y - height / 2) / (0.5 * vars->scale * height) + vars->moveY;
 			new_re = 0;
 			new_im = 0;
 			old_re = 0;
 			old_im = 0;
 			
 			i = 0;
-			while( i < iteration )
+			while( i < vars->iteration )
 			{
 				old_re = new_re;
 				old_im = new_im;
@@ -59,13 +52,13 @@ void	fractal_calc(t_data *img, int width, int height)
 					break;
 			}
 
-			if(i == iteration)
-				color = 0;
+			if(i == vars->iteration)
+				color = 0x0;
 
 			else
-				color = create_trgb(0, 0, 255 * i / iteration, 255);
+				color = create_trgb(0, 3, 255 * i / vars->iteration, 255 );
 
-			my_mlx_pixel_put(img, x, y, color);
+			my_mlx_pixel_put(vars->img, x, y, color);
 
 			y++;
 		}
