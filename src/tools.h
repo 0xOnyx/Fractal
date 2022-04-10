@@ -21,11 +21,13 @@ typedef struct s_vars {
 	double moveX;
 	double moveY;
 	double scale;
+	double pr;
+	double pi;
 	
 	unsigned int iteration;
 
 	t_data *img;
-	
+		
 }	t_vars;
 
 

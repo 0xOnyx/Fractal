@@ -24,15 +24,18 @@ void	fractal_calc(t_vars *vars, int width, int height)
 	x = 0;
 	y = 0;
 
-	pr = vars->pr;
-	pi = vars->pi;
+	
 
 	while(x < height)
 	{
 		while(y < width)
 		{
-			new_re = 1.5 * (x - width / 2) / (0.5 * vars->scale * width) + vars->moveX;
-			new_im = (y - height / 2) / (0.5 * vars->scale * height) + vars->moveY;
+			pr = 1.5 * (x - width / 2) / (0.5 * vars->scale * width) + vars->moveX;
+			pi = (y - height / 2) / (0.5 * vars->scale * height) + vars->moveY;
+			new_re = 0;
+			new_im = 0;
+			old_re = 0;
+			old_im = 0;
 			
 			i = 0;
 			while( i < vars->iteration )
@@ -53,7 +56,7 @@ void	fractal_calc(t_vars *vars, int width, int height)
 				color = 0x0;
 
 			else
-				color = create_trgb(0, 3, 255 - (255 * i / vars->iteration) , 255 );
+				color = create_trgb(0, 3, 255 * i / vars->iteration, 255 );
 
 			my_mlx_pixel_put(vars->img, x, y, color);
 

@@ -34,6 +34,11 @@ int	key_event_mlx(int keycode, t_vars *vars)
 	else if(keycode == 65361)
 		vars->moveX -= 0.15;
 
+/*	else if(keycode)
+		vars->pi += 0.005;
+	else if(keycode == )
+		vars->pr += 0.005;
+*/
 	vars->iteration = 2;
 
 	return (0);
@@ -42,7 +47,7 @@ int	key_event_mlx(int keycode, t_vars *vars)
 int	render_next_frame(t_vars *vars)
 {
 
-	printf("new frame to create =>\n\toptions => \n\tscale =>%f\n\tmoveX=>%f\n\tmoveY=>%f\n", vars->scale, vars->moveX, vars->moveY);
+//	printf("new frame to create =>\n\toptions => \n\tscale =>%f\n\tmoveX=>%f\n\tmoveY=>%f\n", vars->scale, vars->moveX, vars->moveY);
 	fractal_calc(vars, width, height);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->img->img, 0, 0);
 
@@ -57,10 +62,12 @@ int	main(int argc, char *argv)
 	t_vars vars;
 	t_data img;
 
-	vars.moveX = -0.5;
+	vars.moveX = 0;
 	vars.moveY = 0;
 	vars.scale = 1;
 	vars.iteration = 2;
+	vars.pr = -0.8;
+	vars.pi = 0.156;
 
 	vars.mlx = mlx_init();
 	if(!vars.mlx)
@@ -68,7 +75,7 @@ int	main(int argc, char *argv)
 
 	vars.win = mlx_new_window(vars.mlx, width, height, "fractal");
 	if(!vars.win)
-		return (0);
+		return (-1);
 
 	img.img = mlx_new_image(vars.mlx, width, height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
